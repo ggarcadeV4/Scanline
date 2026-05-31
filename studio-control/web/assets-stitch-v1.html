@@ -1,0 +1,317 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Arcade Studio | Asset Management VIP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            background-color: #0e0e0e;
+            color: #e0e0e0;
+            -webkit-font-smoothing: antialiased;
+            font-family: 'Sora', sans-serif;
+        }
+        .studio-card {
+            background-color: #131313;
+            border: 1px solid #222222;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.8);
+        }
+        .active-glow {
+            border-color: #39ff14;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .matrix-text-glow {
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "primary": "#39ff14",
+                "on-primary": "#000000",
+                "primary-container": "#39ff14",
+                "on-primary-container": "#000000",
+                "secondary": "#a0a0a0",
+                "background": "#0e0e0e",
+                "surface": "#131313",
+                "surface-variant": "#1a1a1a",
+                "on-surface": "#e0e0e0",
+                "on-surface-variant": "#888888",
+                "outline": "#333333",
+                "outline-variant": "#222222",
+                "surface-container-lowest": "#080808",
+                "surface-container-low": "#0c0c0c",
+                "surface-container": "#111111",
+                "surface-container-high": "#161616",
+                "surface-container-highest": "#1c1c1c",
+                "error": "#ff3131",
+                "error-container": "#450a0a",
+                "on-error-container": "#ffdad6",
+                "secondary-container": "#1a1a1a"
+              },
+              "borderRadius": {
+                "DEFAULT": "0px",
+                "lg": "2px",
+                "xl": "4px",
+                "full": "9999px"
+              },
+              "spacing": {
+                "unit": "4px",
+                "stack-gap": "12px",
+                "grid-gutter": "20px",
+                "container-padding": "24px",
+                "card-inner-padding": "16px"
+              },
+              "fontFamily": {
+                "body-md": ["Sora"],
+                "headline-lg": ["Sora"],
+                "body-lg": ["Sora"],
+                "status-mono": ["JetBrains Mono"],
+                "status-lg-mono": ["JetBrains Mono"],
+                "label-sm": ["Sora"],
+                "headline-md": ["Sora"]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="font-body-md overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full z-40 flex flex-col bg-surface-container-lowest border-r border-outline-variant w-20 md:w-64 transition-all duration-200 ease-in-out">
+<div class="p-container-padding">
+<h1 class="font-headline-md text-xl font-bold text-primary matrix-text-glow">Arcade Studio</h1>
+<p class="font-status-mono text-[10px] tracking-widest text-on-surface-variant mt-1">VIP EDITION // PROD</p>
+</div>
+<nav class="flex-1 mt-6">
+<ul class="space-y-1">
+<li class="">
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant px-container-padding py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="hidden md:block font-status-mono text-[13px]">Dashboard</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant px-container-padding py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">menu_book</span>
+<span class="hidden md:block font-status-mono text-[13px]">Teleprompter</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 bg-surface-variant text-primary border-r-2 border-primary px-container-padding py-3" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="hidden md:block font-status-mono text-[13px]">Assets</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant px-container-padding py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">sync</span>
+<span class="hidden md:block font-status-mono text-[13px]">Sync</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 text-on-surface-variant hover:bg-surface-variant px-container-padding py-3 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">settings</span>
+<span class="hidden md:block font-status-mono text-[13px]">Settings</span>
+</a>
+</li><li class="px-container-padding py-4 border-t border-outline-variant mt-2">
+    <h4 class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-widest font-bold mb-4">Session_Info</h4>
+    <div class="space-y-4">
+        <div>
+            <p class="font-label-sm text-[9px] text-on-surface-variant mb-0.5">ASSETS_TOT</p>
+            <p class="font-status-lg-mono text-xl text-primary font-bold">12</p>
+        </div>
+        <div>
+            <p class="font-label-sm text-[9px] text-on-surface-variant mb-0.5">ELAPSED_T</p>
+            <p class="font-status-lg-mono text-xl text-on-surface">14:02</p>
+        </div>
+    </div>
+    <div class="mt-4 pt-4 border-t border-outline-variant/30">
+        <p class="font-label-sm text-[9px] text-on-surface-variant uppercase mb-2">Sync_Status</p>
+        <div class="flex items-center gap-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+            <span class="font-status-mono text-[10px] text-on-surface">ALL_STAGED</span>
+        </div>
+    </div>
+</li>
+</ul>
+</nav>
+<div class="p-container-padding border-t border-outline-variant flex items-center gap-3">
+<div class="w-10 h-10 rounded-sm bg-surface-variant flex items-center justify-center overflow-hidden border border-outline">
+<img alt="Studio Operator" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8bpauaYrRqpdNviO5qnCVYZts8uuYryYodFdvb-KbVXMS9g9p_QQQWZe78t7mOS2RgZLoEgqk1USZRXhO3LnoMaYhCspuUU7XuxhbAvpZMKOrz_WBAc9OFrvb78ohbDpTFCwV1jjM-5jYtm7oT0Eml8z_8CKcAAZ3vGvATnkkqHipWFGpwXGelC2GMn39K3T1JBQSkCDrRmrQrJySSae6nPgjSJuhIPdMR8vQMrEo4ouI4CAuw-Tj-vCn2qmbVKW65mstUTf2_58" class="">
+</div>
+<div class="hidden md:block">
+<p class="font-status-mono text-[12px] text-on-surface">Operator_01</p>
+<p class="font-label-sm text-[10px] text-primary">ONLINE</p>
+</div>
+</div>
+</aside>
+<!-- Main Stage -->
+<main class="ml-20 md:ml-64 h-screen flex flex-col relative pb-20">
+<!-- Top Bar -->
+<header class="h-16 flex justify-between items-center px-container-padding border-b border-outline-variant bg-surface-container-low">
+<div>
+<h2 class="font-headline-md text-xl font-bold text-on-surface">Asset Management</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 border border-primary/20 px-3 py-1 rounded-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-status-mono text-[11px] text-primary uppercase">Sys_Healthy</span>
+</div>
+<div class="flex gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">sensors</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">memory</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">save</button>
+</div>
+</div>
+</header>
+<!-- Workspace Scroll Area -->
+<div class="flex-1 overflow-y-auto p-container-padding space-y-6 scroll-hide">
+<!-- Expanded Live Production Control -->
+<section class="flex flex-col gap-6">
+<!-- Active Playback Panel -->
+<div class="studio-card overflow-hidden flex flex-col h-[560px] border-primary/30">
+<div class="px-card-inner-padding py-3 border-b border-outline-variant flex justify-between items-center bg-surface-container-high">
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Live_Preview</span>
+<div class="bg-error text-black px-2 py-0.5 rounded-sm font-status-mono text-[10px] font-bold">REC</div>
+</div>
+<span class="font-status-mono text-[11px] text-primary">Asset: 03_of_12</span>
+</div>
+<div class="flex-1 relative bg-black flex items-center justify-center overflow-hidden">
+<!-- Main Preview Background -->
+<img alt="Camera Feed Preview" class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale brightness-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB620jR4zlYD6pvx3A0hPjayEIpO6IatJFnohyWwlAVjWy2QQeBRp9QlU20gzjO91zFJRt5tx_z3VqGI-eqxujXnkXlSJNF3saQXYfeqow5XsgbBuQ8NgjdDMs2fGtiBgHHKJTbFXGiIyFylS2ilBoZVBwO9GvNgRJO-nVi7H0n4TJNY7l1dzGTHkE1u4eLIG3RUN7bOtfPtYzzk68jG8R85lblZsY10Yomy2AonaPPaDd_B5V97GFrj7inimo5ry-MxYOp5rZgxss">
+<!-- Active Asset Overlay: Lower Third -->
+<div class="absolute bottom-12 left-12 w-[400px] transform transition-all duration-500 translate-y-0 opacity-100">
+<div class="bg-primary border-l-4 border-white p-4 shadow-2xl">
+<h3 class="font-headline-md text-black font-bold uppercase tracking-tight">Sarah Jenkins</h3>
+<p class="font-status-mono text-black text-[11px] font-bold uppercase tracking-widest">Chief Creative Director</p>
+</div>
+</div>
+<!-- Technical Grid Overlay -->
+<div class="absolute inset-0 pointer-events-none opacity-5" style="background-image: radial-gradient(#39ff14 0.5px, transparent 0.5px); background-size: 30px 30px;"></div>
+</div>
+<!-- Production Controls -->
+<div class="p-card-inner-padding bg-surface-container-high flex items-center justify-between border-t border-outline-variant">
+<div class="flex gap-2">
+<button class="border border-outline-variant px-4 py-1.5 rounded-sm font-status-mono text-[11px] hover:border-primary hover:text-primary text-on-surface-variant transition-all">
+                                PREV
+                            </button>
+<button class="border border-outline-variant px-4 py-1.5 rounded-sm font-status-mono text-[11px] hover:border-primary hover:text-primary text-on-surface-variant transition-all">
+                                SHOW
+                            </button>
+<button class="border border-outline-variant px-4 py-1.5 rounded-sm font-status-mono text-[11px] hover:border-primary hover:text-primary text-on-surface-variant transition-all">
+                                HIDE
+                            </button>
+</div>
+<button class="bg-primary text-black px-8 py-2.5 rounded-sm font-status-lg-mono text-[14px] font-bold shadow-[0_0_15px_rgba(57,255,20,0.3)] hover:brightness-110 transition-all flex items-center gap-2">
+                            NEXT_ASSET <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Session Footer Layout: Queue & Info integrated -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Expanded Queue Area -->
+<div class="col-span-12 studio-card p-card-inner-padding lg:col-span-12">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Asset_Queue</h4>
+<button class="flex items-center gap-2 text-primary font-status-mono text-[11px] hover:brightness-110">
+<span class="material-symbols-outlined text-sm">reorder</span>
+                                MODIFY_QUEUE
+                            </button>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 scroll-hide">
+<!-- Asset Carousel Items -->
+<div class="flex-shrink-0 w-72 studio-card active-glow p-3 relative group border-primary/50 bg-surface-container-highest">
+<div class="w-full aspect-video bg-black rounded-sm mb-3 overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvKUgMnafVd24j_-eBR-eH3sjS4AI3MH8M_p3R04Wx0QpIOtu9v5SJomt2G5CFQnCXHgZDPB0mLRTunjzTZMyGmqk09tagS1KUEylMeCC76qU5IUQgF_QVjH6YWOc2VLNRFyRlubd-qs3a2uLg2y5LmBTe6XXcVKx6pt1OWiTkndZePm4lpKJBICXhkQHpyPMaqzCZKP1YfllaC51BiD4PO2kxWiCMupVqQpdckCNpcOdAfFJzOTiUPTTyIZ6iC5ehrGsLBDomc_E">
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-status-mono text-[11px] text-on-surface">L3_Jenkins</p>
+<p class="font-label-sm text-[9px] text-on-surface-variant uppercase">HTML_OVERLAY</p>
+</div>
+<span class="text-primary border border-primary px-1.5 py-0.5 text-[9px] font-status-mono">ACTIVE</span>
+</div>
+</div>
+<div class="flex-shrink-0 w-72 studio-card p-3 relative group opacity-40 hover:opacity-100 transition-all bg-surface-container-highest">
+<div class="w-full aspect-video bg-black rounded-sm mb-3 overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAkRcMPlpR9gXsiRc237_aqC9lU0QNvXSm200LLF19tIE4w2RjOvtkhT8VN_hqWTdRS8iTeYyoQ0VzB-ULFnWrAeGbOOJ2AdClnV9M23RoJmAOfzB2JpR7gtikgdtsd2trEQUIrjiB6c_-Lv9RAmWUAJ_pLBzhOq5rm_N3OSGNPY2LDtcFvW1_RVVvxBa1grh3AA_OgcK9ea9CUN_e2jmk6jTQiycMSKLr82FHzvskUQch3O4EQIuz8ue8B_S9bgTOyYjnWPBZMEM">
+</div>
+<div>
+<p class="font-status-mono text-[11px] text-on-surface">Logo_Arcade</p>
+<p class="font-label-sm text-[9px] text-on-surface-variant uppercase">IMG_OVERLAY</p>
+</div>
+</div>
+<div class="flex-shrink-0 w-72 studio-card p-3 relative group opacity-40 hover:opacity-100 transition-all bg-surface-container-highest">
+<div class="w-full aspect-video bg-black rounded-sm mb-3 overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKrrcpONN2cl8AjzcUDCb0-iCCEYAI9vMBfXXjkY5E1CvUlTrKFqaegYXDE7t2cntSirptDk0GuZY7Uh3eXVlx0TGIdW6VvlOIFn4-WH2QRp0E6pORNoFURnPobzk4kyFMLs02YvgEqTkJcrEYqkZpnww1m8ZU_A61hvMhKSMGbg8VkfHp_Ez96I7dqsf93_3zlmX4Wa5P1CIs1fbhdm-gp_sN16fH5ZpkFefCok7X8Cl1eSEacmsGNPqZJf9tBTgUN4hSdi8e2Yk">
+</div>
+<div>
+<p class="font-status-mono text-[11px] text-on-surface">Intro_Label</p>
+<p class="font-label-sm text-[9px] text-on-surface-variant uppercase">LABEL_CARD</p>
+</div>
+</div>
+<div class="flex-shrink-0 w-72 studio-card p-3 relative group opacity-40 hover:opacity-100 transition-all bg-surface-container-highest">
+<div class="w-full aspect-video bg-black rounded-sm mb-3 overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXFEAYJ_S6eZ9xFxrs7zR46gIYgQtolhFOc-WTn6y_OUZiAUQxAHoud7EsGpnUTwU60Kf-I7r23H7untrujiSuNB0Lv7pp-8wmaZIAvSasFUIqyP1qu5pScnkdzU8WBM0I5OGsIXjTprq0FVTsaTN83VSul3d0xLxuyryHHgf4Z6ycOD19hI7sx8RoclgCDjYpDn2NtVVMELy0xPOV8KkkdND95vCiGYYCErYfaEJqCUvYTNSM_hxDTkfnJOeKTTuooNlkUykfFOE">
+</div>
+<div>
+<p class="font-status-mono text-[11px] text-on-surface">Code_Src_Lrg</p>
+<p class="font-label-sm text-[9px] text-on-surface-variant uppercase">PNG_OVL</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Session Stats Sidebar (next to queue) -->
+
+</div>
+</section>
+</div>
+<!-- Action Dock (Footer) -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-container-padding bg-surface-container border-t border-outline-variant h-20 shadow-[0px_-8px_24px_rgba(0,0,0,0.8)]">
+<div class="flex items-center gap-8">
+<div class="border-l-2 border-primary pl-4">
+<p class="font-status-mono text-[11px] text-primary matrix-text-glow font-bold">VIP_STUDIO // v2.4.0</p>
+</div>
+<div class="hidden lg:flex gap-6">
+<a class="font-status-mono text-[11px] text-on-surface-variant hover:text-primary transition-colors" href="#">PROMPTER_CTL</a>
+<a class="font-status-mono text-[11px] text-on-surface-variant hover:text-primary transition-colors" href="#">ASSET_SYNC</a>
+<a class="font-status-mono text-[11px] text-on-surface-variant hover:text-primary transition-colors" href="#">FLASH_SYS</a>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-surface-variant border border-outline-variant px-5 h-12 rounded-sm flex items-center gap-3 font-status-mono text-[11px] text-on-surface hover:border-primary transition-all active:scale-95">
+<span class="material-symbols-outlined text-primary text-[18px]">stop_circle</span>
+                    PAUSE_REC
+                </button>
+<button class="bg-error-container border border-error/40 px-5 h-12 rounded-sm flex items-center gap-3 font-status-mono text-[11px] text-on-error-container animate-pulse shadow-lg shadow-error/10">
+<span class="material-symbols-outlined text-[18px]">fiber_manual_record</span>
+                    LIVE_REC
+                </button>
+</div>
+</footer>
+</main>
+<script>
+        document.querySelectorAll('.studio-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.classList.add('scale-[0.995]');
+            });
+            card.addEventListener('mouseup', () => {
+                card.classList.remove('scale-[0.995]');
+            });
+        });
+    </script>
+
+
+</body></html>

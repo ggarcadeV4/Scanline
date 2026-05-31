@@ -1,0 +1,16 @@
+{
+  "name": "studio-control",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A simplified control layer + overlay system that drives OBS via obs-websocket. Rename to taste.",
+  "main": "server/index.js",
+  "scripts": {
+    "test-connection": "node scripts/connect-test.js",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "obs-websocket-js": "^5.0.6"
+  },
+  "comment": "Versions are starting points — let your build-time agent pin current healthy versions at install. Source Record is an OBS plugin, NOT an npm package; install it inside OBS."
+}

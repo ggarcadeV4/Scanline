@@ -1,0 +1,91 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Studio Control</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--
+  PLACEHOLDER dashboard shell. This is a scaffold starting point, not the finished UI.
+  It proves the front-end can read /api/status and fire an intent. Build out per README
+  build order: status strip -> Solo/Dual flip -> teleprompter -> carousel -> etc.
+  When you build the real thing, your build-time agent (seat #2) takes this further.
+-->
+<style>
+  :root {
+    --bg: #14110f; --panel: #1e1a17; --line: #3a322c;
+    --ink: #efe7dd; --muted: #9c8f81; --live: #d6452b; --ok: #6fae6a; --accent: #e0a64a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    display: grid; place-items: center; padding: 2rem;
+  }
+  .card {
+    width: min(640px, 100%); background: var(--panel);
+    border: 1px solid var(--line); border-radius: 14px; padding: 1.75rem 2rem;
+    box-shadow: 0 24px 60px rgba(0,0,0,.45);
+  }
+  h1 { margin: 0 0 .15rem; font-size: 1.5rem; letter-spacing: .01em; }
+  .sub { margin: 0 0 1.5rem; color: var(--muted); font-size: .9rem; font-style: italic; }
+  .strip {
+    display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center;
+    padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: 10px;
+    background: #181512; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .85rem;
+  }
+  .dot { width: .65rem; height: .65rem; border-radius: 50%; background: var(--muted); display: inline-block; margin-right: .4rem; }
+  .dot.rec { background: var(--live); box-shadow: 0 0 10px var(--live); }
+  .dot.on { background: var(--ok); }
+  .k { color: var(--muted); }
+  button {
+    margin-top: 1.4rem; font: inherit; font-size: .95rem; color: var(--bg);
+    background: var(--accent); border: none; border-radius: 8px; padding: .6rem 1.1rem;
+    cursor: pointer; letter-spacing: .02em;
+  }
+  button:active { transform: translateY(1px); }
+  .note { margin-top: 1.4rem; color: var(--muted); font-size: .8rem; line-height: 1.5; }
+</style>
+
+<div class="card">
+  <h1>Studio Control</h1>
+  <p class="sub">Scaffold shell — drive OBS, don't replace it.</p>
+
+  <div class="strip" id="strip">
+    <span><span class="dot" id="obsDot"></span><span class="k">OBS</span> <span id="obsState">checking…</span></span>
+    <span><span class="dot" id="recDot"></span><span class="k">REC</span> <span id="recState">—</span></span>
+    <span><span class="k">SCENE</span> <span id="scene">—</span></span>
+    <span><span class="k">TIME</span> <span id="tc">00:00:00</span></span>
+  </div>
+
+  <button id="recBtn">Start / Stop Recording</button>
+
+  <p class="note">
+    This shell only proves the pipe: it polls <code>/api/status</code> and fires
+    <code>/api/intent/start_recording</code>. Everything else (Solo/Dual flip, teleprompter,
+    sync-flash, carousel) is on the build list in <code>README.md</code>. Planned intents return
+    <code>501</code> by design — that's "not built yet," not a bug.
+  </p>
+</div>
+
+<script>
+  let recording = false;
+  async function poll() {
+    try {
+      const s = await (await fetch('/api/status')).json();
+      const obsDot = document.getElementById('obsDot');
+      obsDot.className = 'dot' + (s.obsConnected ? ' on' : '');
+      document.getElementById('obsState').textContent = s.obsConnected ? 'connected' : 'not connected';
+      recording = !!s.recording;
+      document.getElementById('recDot').className = 'dot' + (recording ? ' rec' : '');
+      document.getElementById('recState').textContent = recording ? 'recording' : 'idle';
+      document.getElementById('scene').textContent = s.scene || '—';
+      document.getElementById('tc').textContent = s.timecode || '00:00:00';
+    } catch (e) {
+      document.getElementById('obsState').textContent = 'server unreachable';
+    }
+  }
+  document.getElementById('recBtn').addEventListener('click', async () => {
+    await fetch('/api/intent/' + (recording ? 'stop_recording' : 'start_recording'), { method: 'POST' });
+    poll();
+  });
+  poll();
+  setInterval(poll, 1000);
+</script>

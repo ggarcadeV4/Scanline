@@ -1,0 +1,5 @@
+{
+  "_comment": "Copy to obs-websocket.json (gitignored) and fill in. Or use env vars OBS_WS_URL / OBS_WS_PASSWORD. Get the password from OBS: Tools > WebSocket Server Settings > Show Connect Info.",
+  "url": "ws://127.0.0.1:4455",
+  "password": "PUT-YOUR-OBS-WEBSOCKET-PASSWORD-HERE"
+}

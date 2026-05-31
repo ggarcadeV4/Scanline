@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Arcade Studio | VIP Creative Edition</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#1c1b1b",
+                    "secondary": "#ddb7ff",
+                    "on-tertiary-container": "#7a5955",
+                    "outline": "#85967c",
+                    "secondary-fixed": "#f0dbff",
+                    "surface-container": "#201f1f",
+                    "on-primary-fixed-variant": "#095300",
+                    "secondary-container": "#6f00be",
+                    "on-tertiary": "#442927",
+                    "on-tertiary-fixed-variant": "#5d3f3c",
+                    "on-background": "#e5e2e1",
+                    "on-surface-variant": "#baccb0",
+                    "inverse-primary": "#106e00",
+                    "on-secondary-fixed": "#2c0051",
+                    "error": "#ffb4ab",
+                    "background": "#131313",
+                    "primary-fixed": "#79ff5b",
+                    "surface": "#131313",
+                    "on-secondary-fixed-variant": "#6900b3",
+                    "outline-variant": "#3c4b35",
+                    "tertiary-fixed-dim": "#e7bdb8",
+                    "tertiary-fixed": "#ffdad6",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#d6a9ff",
+                    "on-primary-container": "#107100",
+                    "tertiary-container": "#ffd3ce",
+                    "secondary-fixed-dim": "#ddb7ff",
+                    "inverse-surface": "#e5e2e1",
+                    "on-primary-fixed": "#022100",
+                    "surface-variant": "#353534",
+                    "primary-container": "#39ff14",
+                    "surface-bright": "#3a3939",
+                    "on-error": "#690005",
+                    "on-secondary": "#490080",
+                    "primary": "#efffe3",
+                    "surface-dim": "#131313",
+                    "on-primary": "#053900",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-highest": "#353534",
+                    "inverse-on-surface": "#313030",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-tint": "#2ae500",
+                    "tertiary": "#fff8f7",
+                    "on-tertiary-fixed": "#2c1513",
+                    "error-container": "#93000a",
+                    "primary-fixed-dim": "#2ae500",
+                    "on-surface": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "40px",
+                    "gutter": "24px",
+                    "margin": "32px",
+                    "sm": "16px",
+                    "xs": "8px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Sora"],
+                    "label-sm": ["Sora"],
+                    "display-lg": ["Sora"],
+                    "headline-lg": ["Sora"],
+                    "label-md": ["Sora"],
+                    "headline-md": ["Sora"],
+                    "body-md": ["Sora"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0e0e0e;
+            color: #e5e2e1;
+            font-family: 'Sora', sans-serif;
+            overflow-hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid #2e2e2e;
+        }
+        .vu-meter-bar {
+            background: linear-gradient(to top, #39ff14 0%, #39ff14 60%, #ddb7ff 90%, #ffb4ab 100%);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2e2e2e;
+        }
+        .neon-glow-green {
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+        }
+        .neon-glow-purple {
+            box-shadow: 0 0 15px rgba(221, 183, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen py-md px-xs bg-surface-container-lowest border-r border-outline-variant w-64 shrink-0 z-50">
+<div class="px-md mb-xl">
+<h1 class="font-headline-md text-headline-md text-primary-container font-bold tracking-tighter">Arcade Studio</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-base">Pro Control</p>
+</div>
+<nav class="flex-1 space-y-base px-xs">
+<!-- Dashboard Active -->
+<a class="flex items-center gap-sm px-md py-sm transition-colors duration-150 text-primary-container border-r-4 border-primary-container bg-primary-container/5" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm transition-colors duration-150 text-on-surface-variant hover:text-secondary hover:bg-secondary/10" href="#">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+<span class="font-label-md text-label-md">Teleprompter</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm transition-colors duration-150 text-on-surface-variant hover:text-secondary hover:bg-secondary/10" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="font-label-md text-label-md">Assets</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm transition-colors duration-150 text-on-surface-variant hover:text-secondary hover:bg-secondary/10" href="#">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+<span class="font-label-md text-label-md">Sync</span>
+</a>
+</nav>
+<div class="mt-auto px-xs space-y-base">
+<button class="w-full bg-primary-container text-on-primary font-bold py-sm px-md flex items-center justify-center gap-xs mb-md hover:brightness-110 transition-all">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+                GO LIVE
+            </button>
+<a class="flex items-center gap-sm px-md py-sm transition-colors duration-150 text-on-surface-variant hover:text-secondary hover:bg-secondary/10" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm transition-colors duration-150 text-on-surface-variant hover:text-secondary hover:bg-secondary/10" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0 relative">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-md py-sm bg-background border-b border-outline-variant z-40">
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-xs px-sm py-xs bg-surface-container rounded-sm border border-outline-variant/30">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary-container">FPS: 60</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">CPU: 12%</span>
+<div class="w-16 h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[12%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Disk: 45%</span>
+<div class="w-16 h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[45%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-xs text-on-surface-variant hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 bg-surface-container-highest border border-outline-variant overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZgFKC9guSkwnYw78t3lGS69JjOS6B29HYhSOjG5pvyn4VUwE6nFbiMklUpQY2pg4ZnrvmRbOouiEVf7bXo93dr855egPDbpFrJDVtI7DshONvDQUZH1fHdPbm2968ZAAT0d7tXvl5bdFAfPVdPUiN92YOaRxyyl24q10dXcVKF3kE108E4dpsG1fyxoxQZs1dTLVzcqkwpbieDYhw3XQiOfXrxIhldY4JgcXkd55gzRaNuN7tHANBdtDQjtvf9J71BLKchSHXAO8"/>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 overflow-y-auto p-md space-y-md pb-24">
+<div class="grid grid-cols-12 gap-md">
+<!-- Live Preview (Large Center) -->
+<section class="col-span-12 lg:col-span-8 space-y-md">
+<div class="relative aspect-video bg-black border border-outline-variant group">
+<img class="w-full h-full object-cover opacity-80" data-alt="A professional broadcast studio interior featuring a high-end cinematic camera on a tripod. The room is dimly lit with deep obsidian tones and sharp accents of electric green and neon purple LED strips lining the acoustic panels. A large monitor displays complex wave forms and video feeds, creating a high-performance technical futurism atmosphere. The mood is precise, expensive, and uncompromisingly professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4jlS5-EqPTspJyA438-Tp7A4EJM3FdBvwuh90t7GPXcyyOmD-Fc_ne-wnumdmyb1ATz8DH4HPTqfBQ9cZy5kgCrcNGvjS4qNC6snlBsLqehaX3EpdPkN9yJKoi0_O-ehfvXEGq3x5KOnB_UktZ1Wdtxy_A1uDNRJGHSP_6VnOGUKp8fYyX2yJNv5wUly550lMlzXDz6mUZGIt5ZZo41jBXuP3cC_L67cSxEnDN5iVcjCYubbB7LkSx8cRcZtkpn8rr6VKMQ600f8"/>
+<!-- Overlay Controls -->
+<div class="absolute top-md left-md flex gap-xs">
+<div class="bg-error px-sm py-xs text-[10px] font-bold text-on-error flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-on-error"></span>
+                                LIVE PREVIEW
+                            </div>
+<div class="bg-surface-container-lowest/80 backdrop-blur-md px-sm py-xs text-[10px] font-bold text-white border border-white/10">
+                                4K // 60FPS // NDI_01
+                            </div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-surface-container-highest">
+<div class="h-full bg-primary-container w-3/4 shadow-[0_0_8px_#39ff14]"></div>
+</div>
+</div>
+<!-- Source Visibility Toggles -->
+<div class="grid grid-cols-3 gap-sm">
+<button class="flex items-center justify-between p-md bg-surface-container border-t-2 border-primary-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary-container" data-icon="videocam">videocam</span>
+<span class="font-label-md text-label-md">Webcam</span>
+</div>
+<span class="material-symbols-outlined text-primary-container" data-icon="visibility">visibility</span>
+</button>
+<button class="flex items-center justify-between p-md bg-surface-container border-t-2 border-secondary hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="desktop_windows">desktop_windows</span>
+<span class="font-label-md text-label-md">Screen 1</span>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="visibility">visibility</span>
+</button>
+<button class="flex items-center justify-between p-md bg-surface-container border-t-2 border-outline-variant opacity-50 hover:opacity-100 transition-all">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined" data-icon="desktop_windows">desktop_windows</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Screen 2</span>
+</div>
+<span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+</button>
+</div>
+</section>
+<!-- Sidebar Controls -->
+<aside class="col-span-12 lg:col-span-4 space-y-md">
+<!-- Recording Control -->
+<div class="bg-surface-container border border-outline-variant p-md">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Recording Control</h3>
+<span class="font-mono text-primary-container text-body-md tabular-nums" id="timer">01:24:42</span>
+</div>
+<div class="space-y-sm">
+<button class="w-full bg-primary-container text-on-primary-container py-md font-bold text-body-md flex items-center justify-center gap-sm hover:brightness-110 transition-all group active:scale-[0.98]">
+<span class="material-symbols-outlined font-bold" data-icon="stop">stop</span>
+                                STOP RECORDING
+                            </button>
+<button class="w-full bg-transparent border border-secondary text-secondary py-md font-bold text-body-md flex items-center justify-center gap-sm hover:bg-secondary/10 transition-all">
+<span class="material-symbols-outlined" data-icon="pause">pause</span>
+                                PAUSE
+                            </button>
+</div>
+</div>
+<!-- Audio Mixer -->
+<div class="bg-surface-container border border-outline-variant p-md">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-md">Audio Mixer</h3>
+<div class="flex justify-around h-48 py-sm">
+<!-- VU Meters -->
+<div class="flex flex-col items-center gap-xs h-full">
+<div class="w-4 h-full bg-surface-container-lowest border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute bottom-0 w-full vu-meter-bar transition-all duration-75" style="height: 75%"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">MIC 1</span>
+</div>
+<div class="flex flex-col items-center gap-xs h-full">
+<div class="w-4 h-full bg-surface-container-lowest border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute bottom-0 w-full vu-meter-bar transition-all duration-75" style="height: 40%"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">SYS</span>
+</div>
+<div class="flex flex-col items-center gap-xs h-full">
+<div class="w-4 h-full bg-surface-container-lowest border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute bottom-0 w-full vu-meter-bar transition-all duration-75" style="height: 15%"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">AUX</span>
+</div>
+<div class="flex flex-col items-center gap-xs h-full">
+<div class="w-4 h-full bg-surface-container-lowest border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute bottom-0 w-full vu-meter-bar transition-all duration-75" style="height: 60%"></div>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">OUT</span>
+</div>
+</div>
+<div class="mt-md pt-md border-t border-outline-variant/30 flex justify-between">
+<button class="p-xs text-on-surface-variant hover:text-secondary"><span class="material-symbols-outlined" data-icon="tune">tune</span></button>
+<button class="p-xs text-on-surface-variant hover:text-secondary"><span class="material-symbols-outlined" data-icon="volume_up">volume_up</span></button>
+</div>
+</div>
+</aside>
+</div>
+<!-- System Alerts Banner -->
+<div class="glass-panel p-md flex items-center justify-between border-l-4 border-l-primary-container">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary-container" data-icon="info">info</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">System connection stable. All 4 sources synchronized.</p>
+<p class="text-[10px] text-on-surface-variant tracking-wider uppercase">Last sync: 2 minutes ago</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 left-64 right-0 flex justify-between items-center px-md py-base bg-surface-container-low border-t border-outline-variant z-40">
+<div class="flex items-center gap-md">
+<span class="font-label-sm text-label-sm text-on-surface font-bold">VIP_STUDIO // v2.4.0-build.88</span>
+<div class="h-3 w-[1px] bg-outline-variant"></div>
+<span class="font-label-sm text-label-sm text-primary-container flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                    System Health: Optimal
+                </span>
+</div>
+<div class="flex items-center gap-lg">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-opacity" href="#">Network</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-opacity" href="#">Logs</a>
+<div class="flex items-center gap-xs px-sm py-1 bg-surface-container-highest border border-outline-variant">
+<span class="text-[10px] font-mono text-on-surface-variant">LTC: 10:14:22:15</span>
+</div>
+</div>
+</footer>
+</div>
+<script>
+        // Micro-interaction for VU Meters
+        const meters = document.querySelectorAll('.vu-meter-bar');
+        setInterval(() => {
+            meters.forEach(meter => {
+                const randomHeight = Math.floor(Math.random() * 40) + 30;
+                meter.style.height = `${randomHeight}%`;
+            });
+        }, 150);
+
+        // Simple timer logic
+        let seconds = 5082; // Starting at 01:24:42
+        const timerElement = document.getElementById('timer');
+        setInterval(() => {
+            seconds++;
+            const h = Math.floor(seconds / 3600).toString().padStart(2, '0');
+            const m = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            timerElement.textContent = `${h}:${m}:${s}`;
+        }, 1000);
+    </script>
+</body></html>

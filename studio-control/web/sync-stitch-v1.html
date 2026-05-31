@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Arcade Studio | Sync Flash</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .flash-active {
+            background-color: #39ff14 !important;
+            transition: background-color 0.05s ease-in;
+        }
+        .flash-idle {
+            background-color: #0e0e0e;
+            transition: background-color 0.4s ease-out;
+        }
+        .studio-card {
+            background-color: #131313;
+            border: 1px solid #222222;
+            box-shadow: 0px 8px 32px rgba(0,0,0,0.8);
+        }
+        @keyframes pulse-green {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+        .pulse-critical {
+            animation: pulse-green 1s infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#39ff14",
+                        "on-primary": "#000000",
+                        "primary-container": "#1a3311",
+                        "on-primary-container": "#39ff14",
+                        "secondary": "#a0a0a0",
+                        "on-secondary": "#131313",
+                        "surface": "#0e0e0e",
+                        "on-surface": "#ffffff",
+                        "surface-variant": "#1a1a1a",
+                        "on-surface-variant": "#a0a0a0",
+                        "outline": "#333333",
+                        "outline-variant": "#222222",
+                        "background": "#0e0e0e",
+                        "surface-container-low": "#111111",
+                        "surface-container": "#131313",
+                        "surface-container-high": "#181818",
+                        "surface-container-highest": "#222222",
+                        "surface-container-lowest": "#080808",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "2px",
+                        "lg": "4px",
+                        "xl": "8px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "stack-gap": "12px",
+                        "grid-gutter": "20px",
+                        "container-padding": "24px",
+                        "card-inner-padding": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "body-lg": ["Sora"],
+                        "status-mono": ["JetBrains Mono"],
+                        "status-lg-mono": ["JetBrains Mono"],
+                        "label-sm": ["Sora"],
+                        "headline-md": ["Sora"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "status-mono": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "status-lg-mono": ["18px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "headline-md": ["22px", {"lineHeight": "1.3", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen w-screen flex flex-col">
+<!-- Top Navigation Shell -->
+<header class="flex justify-between items-center w-full px-container-padding h-16 border-b border-outline-variant bg-surface-container-low">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-extrabold text-primary tracking-tight">ARCADE <span class="font-light text-on-surface">STUDIO</span></span>
+<span class="px-2 py-0.5 rounded-sm bg-primary/10 border border-primary/20 font-status-mono text-[9px] text-primary uppercase tracking-[0.2em]">VIP Edition</span>
+</div>
+<nav class="hidden md:flex gap-8 items-center h-full">
+<a class="text-on-surface-variant font-status-mono text-status-mono hover:text-primary transition-colors" href="#">DASHBOARD</a>
+<a class="text-on-surface-variant font-status-mono text-status-mono hover:text-primary transition-colors" href="#">TELEPROMPTER</a>
+<a class="text-on-surface-variant font-status-mono text-status-mono hover:text-primary transition-colors" href="#">ASSETS</a>
+<a class="text-primary font-bold border-b border-primary pb-1 font-status-mono text-status-mono" href="#">SYNC</a>
+<a class="text-on-surface-variant font-status-mono text-status-mono hover:text-primary transition-colors" href="#">SETTINGS</a>
+</nav>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary" data-icon="sensors">sensors</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer" data-icon="memory">memory</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer" data-icon="save">save</span>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-grow relative flex items-center justify-center bg-background overflow-hidden p-container-padding">
+<!-- Background Layer -->
+<div class="absolute inset-0 z-0 flash-idle flex flex-col items-center justify-center" id="flash-canvas">
+<div class="absolute bottom-10 right-10 flex items-center gap-3 opacity-30" id="idle-indicator">
+<div class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
+<span class="font-status-mono text-status-mono text-primary tracking-widest">READY</span>
+</div>
+<div class="hidden flex flex-col items-center gap-2" id="flash-fired-status">
+<span class="font-status-lg-mono text-status-lg-mono text-black font-black">SYSTEM FLASH</span>
+<span class="font-status-mono text-status-mono text-black font-bold" id="timestamp">00:00:00:00</span>
+</div>
+</div>
+<!-- Control View Card -->
+<div class="relative z-10 studio-card w-full max-w-lg rounded-none overflow-hidden flex flex-col">
+<!-- Header -->
+<div class="px-card-inner-padding py-3 border-b border-outline-variant flex justify-between items-center bg-surface-container-high">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Temporal Alignment Control</span>
+<div class="flex gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+<!-- Dashboard Content -->
+<div class="p-card-inner-padding space-y-6">
+<!-- Status Row -->
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-lowest rounded-sm border border-outline-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase opacity-60">Latency</p>
+<p class="font-status-lg-mono text-status-lg-mono text-primary">0.42<span class="text-xs ml-1 opacity-50">ms</span></p>
+</div>
+<div class="p-4 bg-surface-container-lowest rounded-sm border border-outline-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase opacity-60">Monitors</p>
+<p class="font-status-lg-mono text-status-lg-mono text-on-surface">03<span class="text-xs ml-1 opacity-50">Active</span></p>
+</div>
+</div>
+<!-- Primary Action -->
+<div class="flex flex-col items-center py-4">
+<button class="group relative w-full h-32 rounded-sm border border-primary/30 bg-primary/5 hover:bg-primary/10 hover:border-primary transition-all active:scale-[0.98] duration-150 flex flex-col items-center justify-center overflow-hidden" id="trigger-btn">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-4xl text-primary mb-2" data-icon="flash_on">flash_on</span>
+<span class="font-status-mono text-status-mono text-primary font-bold tracking-[0.3em] uppercase">Trigger Sync Flash</span>
+</button>
+<p class="mt-4 font-body-md text-body-md text-on-surface-variant text-center px-10 opacity-60 italic">
+                    Broadcasts an electric green frame across all connected nodes for precision temporal sync.
+                </p>
+</div>
+<!-- Configuration List -->
+<div class="space-y-3 border-t border-outline-variant pt-4">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface uppercase tracking-wider text-xs">Full Screen Overlay</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-8 h-4 bg-surface-container-highest rounded-none border border-outline-variant peer peer-checked:after:translate-x-4 peer-checked:after:bg-primary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface-variant after:rounded-none after:h-2.5 after:w-2.5 after:transition-all peer-checked:bg-primary/10 peer-checked:border-primary/50"></div>
+</label>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface uppercase tracking-wider text-xs">Auto-Dismiss Status</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-8 h-4 bg-surface-container-highest rounded-none border border-outline-variant peer peer-checked:after:translate-x-4 peer-checked:after:bg-primary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface-variant after:rounded-none after:h-2.5 after:w-2.5 after:transition-all peer-checked:bg-primary/10 peer-checked:border-primary/50"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Node Preview -->
+<div class="bg-surface-container-lowest p-2 grid grid-cols-3 gap-2 border-t border-outline-variant">
+<div class="aspect-video bg-surface-variant rounded-none flex items-center justify-center opacity-40 border border-transparent">
+<span class="font-status-mono text-[9px] text-on-surface-variant tracking-widest">NODE_01</span>
+</div>
+<div class="aspect-video bg-surface-variant rounded-none flex items-center justify-center border border-primary/40 bg-primary/5">
+<span class="font-status-mono text-[9px] text-primary tracking-widest font-bold">NODE_02_MAIN</span>
+</div>
+<div class="aspect-video bg-surface-variant rounded-none flex items-center justify-center opacity-40 border border-transparent">
+<span class="font-status-mono text-[9px] text-on-surface-variant tracking-widest">NODE_03</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Global Dock / Footer -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-container-padding h-16 border-t border-outline-variant bg-surface-container-low shadow-[0px_-8px_32px_rgba(0,0,0,0.8)]">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-primary pulse-critical"></div>
+<span class="font-status-mono text-status-mono text-primary uppercase tracking-widest">System_Optimized</span>
+</div>
+<span class="text-outline-variant font-status-mono opacity-30">/</span>
+<span class="font-status-mono text-status-mono text-on-surface-variant opacity-60">VIP_EDITION_2.4.0</span>
+</div>
+<div class="flex items-center gap-8">
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-[10px] text-on-surface-variant opacity-50 uppercase tracking-widest">Last Trigger</span>
+<span class="font-status-mono text-status-mono text-primary">12:44:02:15</span>
+</div>
+<button class="bg-primary/5 border border-primary/30 px-5 py-1.5 rounded-none font-status-mono text-status-mono text-primary hover:bg-primary/10 hover:border-primary transition-all uppercase tracking-widest">
+            Flash Log
+        </button>
+</div>
+</footer>
+<script>
+    const triggerBtn = document.getElementById('trigger-btn');
+    const flashCanvas = document.getElementById('flash-canvas');
+    const idleIndicator = document.getElementById('idle-indicator');
+    const flashFiredStatus = document.getElementById('flash-fired-status');
+    const timestampEl = document.getElementById('timestamp');
+
+    function getCurrentTimeCode() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        const ms = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0');
+        return `${h}:${m}:${s}:${ms}`;
+    }
+
+    triggerBtn.addEventListener('mousedown', () => {
+        flashCanvas.classList.remove('flash-idle');
+        flashCanvas.classList.add('flash-active');
+        idleIndicator.classList.add('hidden');
+        flashFiredStatus.classList.remove('hidden');
+        timestampEl.innerText = getCurrentTimeCode();
+    });
+
+    const resetFlash = () => {
+        flashCanvas.classList.remove('flash-active');
+        flashCanvas.classList.add('flash-idle');
+        setTimeout(() => {
+            if (flashCanvas.classList.contains('flash-idle')) {
+                flashFiredStatus.classList.add('hidden');
+                idleIndicator.classList.remove('hidden');
+            }
+        }, 1500);
+    };
+
+    triggerBtn.addEventListener('mouseup', resetFlash);
+    triggerBtn.addEventListener('mouseleave', resetFlash);
+    
+    window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            if (!flashCanvas.classList.contains('flash-active')) {
+                triggerBtn.dispatchEvent(new Event('mousedown'));
+            }
+        }
+    });
+    window.addEventListener('keyup', (e) => {
+        if (e.code === 'Space') {
+            triggerBtn.dispatchEvent(new Event('mouseup'));
+        }
+    });
+</script>
+</body></html>

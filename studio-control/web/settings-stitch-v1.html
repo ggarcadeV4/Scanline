@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Arcade Studio | Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Sora', sans-serif;
+            background-color: #0e0e0e;
+            color: #e5e2e1;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2e2e2e;
+        }
+        .glow-green:focus {
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.15);
+        }
+        .neon-border-purple {
+            border: 1px solid rgba(221, 183, 255, 0.2);
+        }
+        .neon-border-green {
+            border: 1px solid rgba(57, 255, 20, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#5d3f3c",
+                      "on-secondary": "#490080",
+                      "inverse-on-surface": "#313030",
+                      "on-primary-fixed-variant": "#095300",
+                      "primary-fixed-dim": "#2ae500",
+                      "surface": "#131313",
+                      "on-primary-fixed": "#022100",
+                      "on-error-container": "#ffdad6",
+                      "on-surface-variant": "#baccb0",
+                      "surface-container-high": "#2a2a2a",
+                      "surface-container-highest": "#353534",
+                      "on-background": "#e5e2e1",
+                      "secondary-container": "#6f00be",
+                      "inverse-surface": "#e5e2e1",
+                      "on-secondary-container": "#d6a9ff",
+                      "inverse-primary": "#106e00",
+                      "surface-bright": "#3a3939",
+                      "on-secondary-fixed-variant": "#6900b3",
+                      "surface-tint": "#2ae500",
+                      "primary": "#efffe3",
+                      "background": "#131313",
+                      "on-primary": "#053900",
+                      "tertiary-fixed-dim": "#e7bdb8",
+                      "secondary-fixed": "#f0dbff",
+                      "primary-container": "#39ff14",
+                      "surface-container-lowest": "#0e0e0e",
+                      "primary-fixed": "#79ff5b",
+                      "on-tertiary-container": "#7a5955",
+                      "error": "#ffb4ab",
+                      "on-primary-container": "#107100",
+                      "on-tertiary": "#442927",
+                      "error-container": "#93000a",
+                      "on-error": "#690005",
+                      "outline": "#85967c",
+                      "surface-variant": "#353534",
+                      "on-surface": "#e5e2e1",
+                      "outline-variant": "#3c4b35",
+                      "tertiary": "#fff8f7",
+                      "surface-container-low": "#1c1b1b",
+                      "surface-container": "#201f1f",
+                      "tertiary-fixed": "#ffdad6",
+                      "on-secondary-fixed": "#2c0051",
+                      "tertiary-container": "#ffd3ce",
+                      "surface-dim": "#131313",
+                      "secondary": "#ddb7ff",
+                      "secondary-fixed-dim": "#ddb7ff",
+                      "on-tertiary-fixed": "#2c1513"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "64px",
+                      "gutter": "24px",
+                      "base": "4px",
+                      "margin": "32px",
+                      "sm": "16px",
+                      "md": "24px",
+                      "lg": "40px",
+                      "xs": "8px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Sora"],
+                      "headline-md": ["Sora"],
+                      "label-md": ["Sora"],
+                      "headline-lg-mobile": ["Sora"],
+                      "display-lg": ["Sora"],
+                      "headline-lg": ["Sora"],
+                      "body-md": ["Sora"],
+                      "body-lg": ["Sora"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface-container-lowest text-on-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant flex flex-col py-md px-sm z-50">
+<div class="mb-lg px-xs">
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 bg-primary-container flex items-center justify-center rounded-sm">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<div>
+<h1 class="font-headline-md text-label-md font-bold text-primary">VIP Creative</h1>
+<p class="font-label-sm text-[10px] text-on-surface-variant opacity-70">V2.4.0 High-Performance</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant font-label-md hover:text-primary hover:bg-surface-container-high transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">dashboard_customize</span>
+<span>Master Control</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant font-label-md hover:text-primary hover:bg-surface-container-high transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span>Teleprompter</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant font-label-md hover:text-primary hover:bg-surface-container-high transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">folder_special</span>
+<span>Asset Manager</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant font-label-md hover:text-primary hover:bg-surface-container-high transition-all active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">sync_alt</span>
+<span>System Sync</span>
+</a>
+</nav>
+<div class="mt-auto pt-md border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-sm px-sm py-xs text-primary bg-primary-container/10 border-r-4 border-primary font-bold font-label-md transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant font-label-md hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+<button class="w-full mt-md py-sm bg-primary-container text-on-primary-container font-label-md font-bold uppercase tracking-widest active:scale-95 duration-150">
+                Go Live
+            </button>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 left-64 h-16 bg-surface border-b border-outline-variant z-40 flex justify-between items-center px-md">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">Arcade Studio</span>
+<div class="hidden md:flex items-center bg-surface-container-highest px-sm py-1 rounded-sm border border-outline-variant">
+<span class="material-symbols-outlined text-sm mr-xs text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md text-on-surface w-48" placeholder="Search parameters..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-sm text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">speed</span>
+<span class="font-label-sm">8.2 GB/s</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">memory</span>
+<span class="font-label-sm">12% CPU</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span class="font-label-sm">2.4 TB</span>
+</div>
+</div>
+<button class="bg-error-container text-error px-md py-1 font-label-md font-bold rounded-sm flex items-center gap-xs active:scale-95 transition-transform">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                REC
+            </button>
+<div class="w-10 h-10 rounded-full border border-primary-container p-0.5 overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3JIPSbRMX_Xum6n4Z7UQS4yzNm3yjxWCpP0edq0-AaB9XQzvMj55sDACUUZ1A2spxJsFaiLIfT3ztCVNdXv0d5G85SGhXddBw9tuAffnKHTXj5d-qAOyV959Vg-tAQOrB4nnoNjZrROv4qiFkvSu1jIbjl1I_k8WmgtaRuzEmVaNHlEy1oOpK5-FzdoBvupkRd7muu3DgNXvvDXOU3gSvvL8_paLyEyp8Y8NeyfhqQffLTADMGdhfqSIdUrkBaFEwDDoPEklKCEw"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 p-lg pb-xl max-w-7xl mx-auto">
+<header class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">System Configuration</h2>
+<p class="font-body-md text-on-surface-variant">Adjust your high-performance environment settings for Arcade Studio V2.4.0.</p>
+</header>
+<div class="grid grid-cols-12 gap-md">
+<!-- Video Settings -->
+<section class="col-span-12 lg:col-span-8 bg-surface-container-low border border-outline-variant p-md">
+<div class="flex items-center gap-sm mb-md border-b border-outline-variant pb-xs">
+<span class="material-symbols-outlined text-secondary">videocam</span>
+<h3 class="font-label-md text-lg text-secondary uppercase tracking-widest">Video Settings</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-base">
+<label class="font-label-sm text-on-surface-variant">RESOLUTION</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md p-sm focus:border-primary focus:ring-1 focus:ring-primary/20 appearance-none rounded-none glow-green">
+<option>3840 x 2160 (4K Ultra HD)</option>
+<option selected="">1920 x 1080 (Full HD)</option>
+<option>1280 x 720 (HD)</option>
+</select>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-on-surface-variant">FRAME RATE (FPS)</label>
+<div class="flex bg-surface-container-lowest border border-outline-variant p-1">
+<button class="flex-1 py-xs font-label-md bg-primary-container text-on-primary-container">60 FPS</button>
+<button class="flex-1 py-xs font-label-md text-on-surface-variant hover:text-on-surface">30 FPS</button>
+<button class="flex-1 py-xs font-label-md text-on-surface-variant hover:text-on-surface">24 FPS</button>
+</div>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-on-surface-variant">BITRATE (KBPS)</label>
+<input class="w-full accent-primary mt-2" max="50000" min="1000" step="1000" type="range" value="12000"/>
+<div class="flex justify-between font-label-sm text-on-surface-variant">
+<span>1,000</span>
+<span class="text-primary">12,000 KBPS</span>
+<span>50,000</span>
+</div>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-on-surface-variant">ENCODER ENGINE</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md p-sm focus:border-primary focus:ring-1 focus:ring-primary/20 appearance-none rounded-none glow-green">
+<option>NVIDIA NVENC H.264 (HEVC)</option>
+<option>AMD Advanced Media Framework</option>
+<option>x264 (CPU Software)</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Account & Subscription -->
+<section class="col-span-12 lg:col-span-4 bg-surface-container-low border border-outline-variant p-md">
+<div class="flex items-center gap-sm mb-md border-b border-outline-variant pb-xs">
+<span class="material-symbols-outlined text-primary">workspace_premium</span>
+<h3 class="font-label-md text-lg text-primary uppercase tracking-widest">Account</h3>
+</div>
+<div class="space-y-md">
+<div class="p-sm bg-surface-container-highest border border-primary/30 flex items-center justify-between">
+<div>
+<p class="font-label-sm text-primary">SUBSCRIPTION STATUS</p>
+<p class="font-headline-md text-on-surface">VIP Creative</p>
+</div>
+<div class="bg-primary-container text-on-primary-container px-sm py-xs font-label-sm rounded-none shadow-[0_0_15px_rgba(57,255,20,0.3)]">
+                            ACTIVE
+                        </div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between font-body-md py-xs border-b border-outline-variant">
+<span class="text-on-surface-variant">License ID</span>
+<span class="font-label-md">ARC-772-901-VX</span>
+</div>
+<div class="flex justify-between font-body-md py-xs border-b border-outline-variant">
+<span class="text-on-surface-variant">Renewal Date</span>
+<span class="font-label-md">Oct 12, 2025</span>
+</div>
+</div>
+<button class="w-full py-sm border border-secondary text-secondary font-label-md hover:bg-secondary/10 transition-colors active:scale-95">
+                        Manage Billing
+                    </button>
+</div>
+</section>
+<!-- Audio Settings -->
+<section class="col-span-12 lg:col-span-6 bg-surface-container-low border border-outline-variant p-md">
+<div class="flex items-center gap-sm mb-md border-b border-outline-variant pb-xs">
+<span class="material-symbols-outlined text-secondary">graphic_eq</span>
+<h3 class="font-label-md text-lg text-secondary uppercase tracking-widest">Audio Configuration</h3>
+</div>
+<div class="space-y-md">
+<div class="space-y-base">
+<label class="font-label-sm text-on-surface-variant">INPUT DEVICE</label>
+<div class="relative group">
+<select class="w-full bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md p-sm focus:border-primary appearance-none rounded-none glow-green">
+<option>Scarlett 2i2 USB Interface (Channel 1)</option>
+<option>Internal Microphone Array</option>
+<option>Virtual Audio Cable (A+B)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-base">
+<label class="font-label-sm text-on-surface-variant">SAMPLE RATE</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md p-sm appearance-none rounded-none">
+<option>44.1 kHz</option>
+<option selected="">48.0 kHz</option>
+<option>96.0 kHz</option>
+</select>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-on-surface-variant">NOISE SUPPRESSION</label>
+<div class="flex items-center h-[48px]">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-none border border-outline peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface-variant after:border-gray-300 after:border after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container peer-checked:after:bg-on-primary"></div>
+<span class="ml-3 font-body-md text-on-surface">Enabled</span>
+</label>
+</div>
+</div>
+</div>
+<div class="h-8 bg-surface-container-lowest border border-outline-variant flex items-center px-1 overflow-hidden">
+<div class="flex gap-[2px] w-full items-end h-full py-1" id="audio-levels">
+</div>
+</div>
+</div>
+</section>
+<!-- System Preferences -->
+<section class="col-span-12 lg:col-span-6 bg-surface-container-low border border-outline-variant p-md">
+<div class="flex items-center gap-sm mb-md border-b border-outline-variant pb-xs">
+<span class="material-symbols-outlined text-secondary">settings_suggest</span>
+<h3 class="font-label-md text-lg text-secondary uppercase tracking-widest">System Preferences</h3>
+</div>
+<div class="space-y-md">
+<div class="flex items-center justify-between p-sm bg-surface-container-lowest border border-outline-variant">
+<div>
+<p class="font-label-md text-on-surface">Auto-record on launch</p>
+<p class="font-label-sm text-on-surface-variant">Start capture immediately when app opens</p>
+</div>
+<input class="w-6 h-6 border-outline-variant text-primary focus:ring-primary bg-surface-container-highest rounded-none" type="checkbox"/>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-on-surface-variant">STORAGE PATH</label>
+<div class="flex">
+<input class="flex-1 bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md p-sm focus:outline-none" readonly="" type="text" value="D:/ArcadeStudio/Captures/2024"/>
+<button class="bg-surface-container-highest border border-l-0 border-outline-variant px-md font-label-md hover:text-primary transition-colors">Browse</button>
+</div>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-on-surface-variant">HOTKEYS CONFIGURATION</label>
+<div class="grid grid-cols-2 gap-sm">
+<div class="flex items-center justify-between p-xs bg-surface-container-lowest border border-outline-variant">
+<span class="font-label-sm text-on-surface-variant">START REC</span>
+<kbd class="px-2 py-0.5 bg-surface-container-high border border-outline text-primary font-label-sm">CTRL + R</kbd>
+</div>
+<div class="flex items-center justify-between p-xs bg-surface-container-lowest border border-outline-variant">
+<span class="font-label-sm text-on-surface-variant">SCREENSHOT</span>
+<kbd class="px-2 py-0.5 bg-surface-container-high border border-outline text-primary font-label-sm">F12</kbd>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Action Footer -->
+<div class="mt-lg flex justify-end gap-md">
+<button class="px-xl py-sm border border-outline-variant font-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors">
+                Restore Defaults
+            </button>
+<button class="px-xl py-sm bg-primary-container text-on-primary-container font-label-md font-bold shadow-[0_0_20px_rgba(57,255,20,0.2)] active:scale-95 transition-all">
+                Save All Changes
+            </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 left-64 right-0 bg-surface-container-lowest border-t border-outline-variant flex justify-between items-center px-md py-xs z-40">
+<div class="flex items-center gap-md font-label-sm text-on-surface-variant">
+<p class="text-secondary">Arcade Studio - System Ready</p>
+</div>
+<div class="flex items-center gap-lg font-label-sm text-on-surface-variant">
+<span class="hover:text-secondary transition-colors cursor-default">Latency: 24ms</span>
+<span class="hover:text-secondary transition-colors cursor-default">Stream: 60FPS</span>
+<span class="hover:text-secondary transition-colors cursor-default">Server: US-East</span>
+</div>
+</footer>
+<script>
+        const audioLevels = document.getElementById('audio-levels');
+        const barCount = 48;
+
+        for (let i = 0; i < barCount; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'flex-1 bg-primary/20 transition-all duration-300';
+            bar.style.height = '10%';
+            audioLevels.appendChild(bar);
+        }
+
+        function updateLevels() {
+            const bars = audioLevels.children;
+            for (let i = 0; i < bars.length; i++) {
+                const height = Math.random() * (i > 10 && i < 30 ? 80 : 40) + 10;
+                bars[i].style.height = `${height}%`;
+                if (height > 70) {
+                    bars[i].style.backgroundColor = 'rgba(57, 255, 20, 0.6)';
+                } else {
+                    bars[i].style.backgroundColor = 'rgba(57, 255, 20, 0.15)';
+                }
+            }
+        }
+
+        setInterval(updateLevels, 150);
+
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.style.transform = 'scale(0.98)';
+            });
+            el.addEventListener('mouseup', () => {
+                el.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

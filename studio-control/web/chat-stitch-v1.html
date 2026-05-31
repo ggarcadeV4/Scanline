@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Arcade Studio | Studio Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-border-purple {
+            border: 1px solid #bf5af2;
+            box-shadow: 0 0 10px rgba(191, 90, 242, 0.2);
+        }
+        .neon-glow-green {
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #353535;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #39ff14;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#2ae500",
+                        "on-surface-variant": "#baccb0",
+                        "surface-container": "#1f1f1f",
+                        "surface-dim": "#131313",
+                        "inverse-surface": "#e2e2e2",
+                        "on-primary": "#053900",
+                        "tertiary": "#fff8f7",
+                        "glass-border": "rgba(255, 255, 255, 0.1)",
+                        "on-primary-container": "#107100",
+                        "neon-green": "#39FF14",
+                        "electric-purple": "#bf5af2",
+                        "deep-obsidian": "#0A0A0A",
+                        "toxic-glow": "rgba(57, 255, 20, 0.4)",
+                        "background": "#131313",
+                        "primary-container": "#39ff14",
+                        "on-surface": "#e2e2e2"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Sora"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "title-md": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "title-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "base": "8px"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-deep-obsidian text-on-surface font-body-md overflow-hidden h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-20 bg-deep-obsidian/80 backdrop-blur-xl border-b border-glass-border">
+<div class="flex items-center gap-8">
+<span class="font-headline-lg text-headline-lg font-black text-primary-container tracking-tighter">STUDIO_OPS.v1</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary-fixed-dim transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-primary-container border-b-2 border-primary-container pb-1 font-body-md text-body-md" href="#">Sessions</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary-fixed-dim transition-colors duration-200" href="#">Assets</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-neon-green transition-all" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-neon-green transition-all" data-icon="settings">settings</span>
+<div class="h-10 w-10 bg-surface-container border border-glass-border flex items-center justify-center">
+<img alt="Producer Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlNoq0OrJmFdaF91_07_MvIunZHFD3FZR-4OF45t22lt3sOv2dpvDL4eHj8PhRhCmvrZrdQ-O0ldPcnlmZwp9SNTaLl790vz4gY55tF1Lw5eGBx11XALde9INw6T9pAABeuU1ipFasqRhdKT17Jl1d015fWINfu_UAxNiXzjFUCDc-NDJIO3YMG0I_5D5Wu0jTXWf00VBVqI_fmZkNy6UoDBVkDtBHuiKniBvdPgPdUj2rpjriv8G25_42enIVys2RbVAo-MLiR18"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 pt-20 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-64 bg-deep-obsidian border-r border-glass-border flex flex-col justify-between py-gutter transition-all">
+<div class="space-y-2">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="h-3 w-3 rounded-full bg-neon-green neon-glow-green"></div>
+<div>
+<div class="font-title-md text-title-md text-primary-container leading-none">MAIN_STAGE_01</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Status: ONLINE</div>
+</div>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant p-4 w-full hover:bg-surface-variant hover:text-primary-container transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="font-label-sm text-label-sm">Live Stream</span>
+</div>
+<div class="flex items-center gap-4 bg-primary-container text-on-primary-container p-4 w-full shadow-toxic-glow translate-x-1 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-label-sm text-label-sm">Studio Chat</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant p-4 w-full hover:bg-surface-variant hover:text-primary-container transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span class="font-label-sm text-label-sm">Participant Mix</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant p-4 w-full hover:bg-surface-variant hover:text-primary-container transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="fiber_manual_record">fiber_manual_record</span>
+<span class="font-label-sm text-label-sm">Recording Log</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant p-4 w-full hover:bg-surface-variant hover:text-primary-container transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm">System Health</span>
+</div>
+</div>
+<div class="px-4">
+<button class="w-full py-4 bg-neon-green text-deep-obsidian font-bold text-label-sm tracking-widest transition-transform active:scale-95 mb-4">START_BROADCAST</button>
+<div class="space-y-1">
+<div class="flex items-center gap-4 text-on-surface-variant p-3 w-full hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant p-3 w-full hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-sm text-label-sm">Logout</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Chat Canvas -->
+<main class="flex-1 flex flex-col bg-deep-obsidian relative">
+<!-- Chat Header -->
+<div class="h-16 flex items-center justify-between px-8 bg-surface-container-lowest border-b border-glass-border">
+<div class="flex items-center gap-4">
+<h2 class="font-title-md text-title-md tracking-tight">STUDIO CHAT <span class="text-on-surface-variant/40">—</span> <span class="text-on-surface-variant">SESSION EP. 24</span></h2>
+<span class="flex items-center gap-1.5 px-2 py-0.5 bg-red-950 text-red-500 border border-red-500/30 text-[10px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                        LIVE
+                    </span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-electric-purple">PRODUCER OVERRIDE</span>
+<button class="w-10 h-5 bg-surface-variant relative border border-glass-border" id="override-toggle">
+<div class="absolute left-0.5 top-0.5 w-3.5 h-3.5 bg-on-surface-variant transition-all duration-200" id="toggle-knob"></div>
+</button>
+</div>
+<div class="flex -space-x-2">
+<img class="w-8 h-8 border border-deep-obsidian object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKOzsC9m0qx4_KYx5eKP9rlACwuNZKYMDzERCeyWmr8dZ1_WGFOwbJ60nLUA8M0o__-29J1SawyQ3YrFakROPt5JByGnfCh5ynSppEJtrtvRhDzS5CdBBW0Rwvfm9rXaO2GpCABLCc_7e9V2yjzBw6-tuo9tNRKR0KnNZmEfW611fDtl88QSOYgqaulDmpt-Cl7ZxefL_-qn-l9LFfuf8UmAsQrYo9wamiP7o297PCl55ImgpLz7rwyKYLBhxr4y2mpsMp__lNazQ"/>
+<div class="w-8 h-8 border border-deep-obsidian bg-surface-container flex items-center justify-center text-[10px] font-bold">+4</div>
+</div>
+</div>
+</div>
+<!-- Message List -->
+<div class="flex-1 overflow-y-auto px-8 py-6 space-y-8 custom-scrollbar">
+<!-- Host Message -->
+<div class="flex gap-4 max-w-2xl">
+<div class="w-10 h-10 border border-neon-green p-0.5 shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSqZrTzb-rNCZqVCABQelzgh9hVKHpBBSxPIEkktO-htCgAfnjvOTOCDeTAT5JmoORAgTyCaMAHBu-6QpF_8sul6hf-MJmTPYlxM5xpYa7HGTeMsk18Pb_Afy69dFWJvyyO7N1I54vigNrDcBMEamcliX1vDy-hf_nyo43GDNoqhsaLAaH1NtPaja-YtHlF96kCUWa7wE0ARNz3em7JBnwQEFFrexHhq2OgtKPi8XtHdIXGKa3d-OCnbFSeuHxXU0V5oQr32DFui0"/>
+</div>
+<div class="space-y-1 w-full">
+<div class="flex items-center gap-3">
+<span class="text-neon-green font-bold text-label-sm">HOST_ALPHA</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant/50">14:22:05</span>
+</div>
+<div class="glass-panel p-4 border-l-4 border-l-neon-green">
+<p class="text-on-surface">We are hitting the high-energy segment in 2 minutes. Prepare the glitch-transition for the main screen. Everyone ready?</p>
+</div>
+<div class="flex justify-end font-label-sm text-[10px] text-neon-green/60">
+                            READ <span class="material-symbols-outlined !text-[12px] ml-1" data-icon="done_all">done_all</span>
+</div>
+</div>
+</div>
+<!-- Producer Message -->
+<div class="flex gap-4 max-w-2xl ml-auto flex-row-reverse">
+<div class="w-10 h-10 border border-electric-purple p-0.5 shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeudDN7rHM9Rj-D7KxPGLdaevrQM02bVKklInF1pA8QCDuzvtcJSJxnfmopEjTa9j5Mi2uYTrLJRicJRV4lNxjalAcuIwANVPqUdznVHOCDQkHggkuPUDqfc6YkttUWj8557HiWah5zEZ-EmxvDp4uGq-wnSaHmptWDAJj7688rSrhe5ID6PHohvyNKbGlPbyqdwjcdrWfP-xfsnD-BaVMe3ENwdEsEDWCYefmoKhaNo62SoA8JhR7khRKk2_zxWyG2LdF-fJCxhw"/>
+</div>
+<div class="space-y-1 w-full text-right">
+<div class="flex items-center gap-3 justify-end">
+<span class="font-label-sm text-[10px] text-on-surface-variant/50">14:22:31</span>
+<span class="text-electric-purple font-bold text-label-sm">PRODUCER_X</span>
+</div>
+<div class="glass-panel p-4 border-r-4 border-r-electric-purple text-left">
+<p class="text-on-surface">Copy that. Glitch-transition assets are loaded into Deck A. Monitoring system health, we are at peak performance.</p>
+</div>
+<div class="flex justify-end font-label-sm text-[10px] text-on-surface-variant/40">
+                            DELIVERED <span class="material-symbols-outlined !text-[12px] ml-1" data-icon="check">check</span>
+</div>
+</div>
+</div>
+<!-- Guest Message -->
+<div class="flex gap-4 max-w-2xl">
+<div class="w-10 h-10 border border-white/20 p-0.5 shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjIAIuzMwRFRiZJr6kAzy7bSGIrOYpNN_pCX16gA-rQRNVp5O7zcjBz99NNJGkFu5aQdMpe9u_SOPA_rQojxw-bJnTj496sx6mK0D4RZZ9v964gwmbSEMi2U-usXWzdVc2bqnGVlHsKk2NxIDKXj0lLGZ3Fsy7HzsEjMMP1V7G4-vr2iGl7gakN6bEi3gjMOmTw1UBOUQmMdwBM_5ix34Oll1_mrkeGw54Z1Pus-4CjdA2pKWXazezkZwipYO9KtfyaHN84QN9SeY"/>
+</div>
+<div class="space-y-1 w-full">
+<div class="flex items-center gap-3">
+<span class="text-on-surface font-bold text-label-sm">GUEST_VANGUARD</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant/50">14:23:00</span>
+</div>
+<div class="glass-panel p-4 border-l-4 border-l-white/20">
+<p class="text-on-surface">I'm standing by in the wings. Level 2 visuals looks stunning from here.</p>
+</div>
+</div>
+</div>
+<!-- Asset Shared -->
+<div class="flex gap-4 max-w-2xl ml-auto flex-row-reverse">
+<div class="w-10 h-10 border border-electric-purple p-0.5 shrink-0 invisible"></div>
+<div class="w-full">
+<div class="glass-panel p-1 neon-border-purple group overflow-hidden cursor-pointer">
+<div class="relative h-48 w-full">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyh28jSTz1V54VtBmXPRUuK1DnWdXMvz8grLLya1nPfAtGTCtqywic_78E0WqsuJdiJOwDqV9KCzDL6xGpi4qJEwNlbASxFkO7FESNg0-VjDJd9oMgdJu29MMPF9dQcAL0GkJy1Mo_fQ0f4Vz0MQ5izbjC_e5WKTc9O2Y0ITHwCghb5fe_SmpBaA1lsLpj72KLO0EWPUndAkTRQPVdzk3qmElZgG7mJUpW_Ya8xAm9n6Ktidz4eMeX-1MOdHGlDu5jPQdz3dIUZlo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-deep-obsidian to-transparent opacity-80"></div>
+<div class="absolute bottom-4 left-4">
+<div class="text-white font-bold text-label-sm">GLITCH_FX_PACK_01.MP4</div>
+<div class="text-on-surface-variant/70 text-[10px] font-label-sm">Shared by PRODUCER_X - 42.4 MB</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-6 bg-deep-obsidian border-t border-glass-border">
+<div class="max-w-5xl mx-auto">
+<div class="flex items-end gap-4 glass-panel p-2 focus-within:border-electric-purple transition-all group">
+<div class="flex gap-2 p-2">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-electric-purple transition-colors">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-electric-purple transition-colors">
+<span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+</button>
+</div>
+<div class="flex-1">
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-on-surface font-body-md placeholder:text-on-surface-variant/30 resize-none py-4" placeholder="Type a secure message to the studio stage..." rows="1"></textarea>
+</div>
+<div class="flex items-center gap-2 p-2">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-neon-green transition-colors">
+<span class="material-symbols-outlined" data-icon="mood">mood</span>
+</button>
+<button class="h-10 px-6 bg-electric-purple text-deep-obsidian font-bold text-label-sm hover:brightness-110 active:scale-95 transition-all">
+                                SEND
+                            </button>
+</div>
+</div>
+<div class="mt-4 flex gap-4">
+<span class="text-[10px] font-label-sm text-on-surface-variant/40">QUICK_OPS:</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface-container border border-glass-border text-[10px] font-label-sm text-on-surface-variant hover:border-neon-green hover:text-neon-green transition-all">TAKE_SCREEN</button>
+<button class="px-3 py-1 bg-surface-container border border-glass-border text-[10px] font-label-sm text-on-surface-variant hover:border-neon-green hover:text-neon-green transition-all">MUTE_GUEST</button>
+<button class="px-3 py-1 bg-surface-container border border-glass-border text-[10px] font-label-sm text-on-surface-variant hover:border-neon-green hover:text-neon-green transition-all">RESET_CLOCK</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+<div class="absolute top-[10%] right-[5%] w-[500px] h-[500px] bg-electric-purple/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] bg-neon-green/5 rounded-full blur-[120px]"></div>
+</div>
+<script>
+        const toggleBtn = document.getElementById('override-toggle');
+        const toggleKnob = document.getElementById('toggle-knob');
+        let isOverrideActive = false;
+
+        toggleBtn.addEventListener('click', () => {
+            isOverrideActive = !isOverrideActive;
+            if (isOverrideActive) {
+                toggleBtn.classList.remove('bg-surface-variant');
+                toggleBtn.classList.add('bg-electric-purple');
+                toggleKnob.classList.add('translate-x-5');
+                toggleKnob.classList.remove('bg-on-surface-variant');
+                toggleKnob.classList.add('bg-deep-obsidian');
+            } else {
+                toggleBtn.classList.add('bg-surface-variant');
+                toggleBtn.classList.remove('bg-electric-purple');
+                toggleKnob.classList.remove('translate-x-5');
+                toggleKnob.classList.add('bg-on-surface-variant');
+                toggleKnob.classList.remove('bg-deep-obsidian');
+            }
+        });
+
+        const chatContainer = document.querySelector('.custom-scrollbar');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        const textarea = document.querySelector('textarea');
+        textarea.addEventListener('input', () => {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        });
+    </script>
+</body></html>
